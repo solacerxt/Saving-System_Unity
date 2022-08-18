@@ -1,4 +1,3 @@
-
 namespace solacerxt.Saving
 {
     [System.Serializable]
