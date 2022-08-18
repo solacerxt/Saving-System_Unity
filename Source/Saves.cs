@@ -6,7 +6,7 @@ namespace solacerxt.Saving
     public static class Saves 
     {
         public static string GetGameDirectory(int index) => 
-            Application.persistentDataPath + "/games/" + index;
+            Application.persistentDataPath + "/saves/" + index;
 
         /// <summary> 
         /// Loads data with given id. Returns false if there is no such data saved in this game 
