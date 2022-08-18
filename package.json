@@ -1,0 +1,20 @@
+{
+  "name": "com.solacerxt.saving",
+  "version": "1.0.1",
+  "displayName": "SavingSystem",
+  "description": "Simple saving system for Unity game with multiple game saves in application",
+  "unity": "2021.3",
+  "unityRelease": "8f1",
+  "documentationUrl": "",
+  "changelogUrl": "",
+  "licensesUrl": "",
+  "keywords": [
+    "saving"
+  ],
+  "author": {
+    "name": "Kirill Yakovlev",
+    "email": "solacerxt@gmail.com",
+    "url": "https://github.com/solacerxt"
+  },
+  "type": "module"
+}
