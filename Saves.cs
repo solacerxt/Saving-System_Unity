@@ -29,9 +29,9 @@ namespace solacerxt.Saving
             return defaultValue;
         }
 
-        ///<summary> 
-        ///Loads data with given id. Returns null if there is no such data saved in this game 
-        ///</summary>
+        /// <summary> 
+        /// Loads data with given id. Returns null if there is no such data saved in this game 
+        /// </summary>
         public static S? Load<S>(string id, Game game) where S : struct, IStorable => 
             _Load<S>(GetGameDirectory(game.Index) + "/", id);
 
@@ -56,9 +56,9 @@ namespace solacerxt.Saving
             return defaultValue;
         }
 
-        ///<summary> 
-        ///Loads data with given id. Returns null if there is no such data saved in app 
-        ///</summary>
+        /// <summary> 
+        /// Loads data with given id. Returns null if there is no such data saved in app 
+        /// </summary>
         public static S? Load<S>(string id) where S : struct, IStorable => 
             _Load<S>("", id);
 
