@@ -65,25 +65,25 @@ namespace solacerxt.Saving
         /// <summary>
         /// Saves data in scope of given game 
         /// </summary>
-        public static void Save<S>(ref S data, string id, ISavedGame savedGame) where S : struct, IStorable => 
+        public static void Save<S>(string id, ref S data, ISavedGame savedGame) where S : struct, IStorable => 
             _Save(ref data, GetGameDirectory(savedGame.Index) + id);
 
         /// <summary>
         /// Saves data boxed in scope of given game 
         /// </summary>
-        public static void SaveBoxed<T>(ref T data, string id, ISavedGame savedGame) => 
+        public static void SaveBoxed<T>(string id, ref T data, ISavedGame savedGame) => 
             _SaveBoxed(ref data, GetGameDirectory(savedGame.Index) + id);
 
         /// <summary> 
         /// Saves data in app scope 
         /// </summary>
-        public static void Save<S>(ref S data, string id) where S : struct, IStorable => 
+        public static void Save<S>(string id, ref S data) where S : struct, IStorable => 
             _Save(ref data, id);
 
         /// <summary> 
         /// Saves data boxed in app scope 
         /// </summary>
-        public static void SaveBoxed<T>(ref T data, string id) => 
+        public static void SaveBoxed<T>(string id, ref T data) => 
             _SaveBoxed(ref data, id);
 
         private static void _SaveBoxed<T>(ref T data, string path)
