@@ -2,7 +2,7 @@
   "name": "com.solacerxt.saving",
   "version": "1.0.1",
   "displayName": "Saving System",
-  "description": "Simple saving system for Unity game with multiple game saves in application",
+  "description": "Simple saving system for Unity game with multiple game saves",
   "unity": "2021.3",
   "unityRelease": "8f1",
   "documentationUrl": "https://github.com/solacerxt/Saving-System_Unity#overview",
