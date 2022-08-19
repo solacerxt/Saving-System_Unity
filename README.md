@@ -88,7 +88,9 @@ public struct StorableBox<T> : IStorable
 ```
 and use `StorableBox<Language>` for this purpose, without adding new stuctures to store other primitives
 
-However, you don't need to define this structure, there is already a built-in `SBox<T>`. Moreover, you can use special methods for this, such as:
+However, you don't need to define this structure, there is already a built-in `SBox<T>`. 
+
+Moreover, you can use special methods for this, such as:
 #### Saving
 ```csharp
 var lang = Language.English;
