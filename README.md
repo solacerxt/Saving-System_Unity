@@ -51,7 +51,7 @@ public struct VideoSettings : IStorable
 ```csharp
 var videoSettings = new VideoSettings();
 ...
-Saves.Save(ref videoSettings, "video"); // pass the id (string) as second argument
+Saves.Save("video", ref videoSettings); // pass the id (string) as first argument
 ```
 
 #### Loading
