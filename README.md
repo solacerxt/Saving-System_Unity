@@ -86,7 +86,7 @@ public struct StorableBox<T> : IStorable
     public T value;
 }
 ```
-and use `StorableBox<Language>` for this purpose, without adding new stuctures to store other primitives
+and use `StorableBox<Language>` for this purpose, so we don't have to define new stuctures to store other primitives
 
 However, you don't need to define this structure manually, there is already a built-in `SBox<T>`. 
 
