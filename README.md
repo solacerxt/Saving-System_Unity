@@ -14,7 +14,43 @@ https://github.com/solacerxt/Saving-System_Unity.git
 _Make sure that your Unity version is >= 2021.3.8f1_
 
 ## Overview
-The static class `Saves` allows you to load and save data with appropriate comprehensive methods. Basically, it works with serializable structures 'implementing' `IStorable` interface _(this is an empty interface, made for constraining generic type parameter)_. These structures should have names with 'S' prefix (Storable)
+The static class `Saves` allows you to load and save data with appropriate comprehensive methods. Basically, it works with serializable structures 'implementing' `IStorable` interface _(this is an empty interface, made for constraining generic type parameter)_
 
 ## Usage
+### General case
+Let's say we need to save video settings:
+```
+screenSize: uint | Fullscreen
+vSync: bool
+particleEffects: None | Low | Normal | High
+```
+
+To store them, we should define an IStorable structure with [System.Serializable] attribute:
+```csharp
+using solacerxt.Saving;
+
+[System.Serializable]
+public struct VideoSettings : IStorable
+{
+    public ScreenSize screenSize;
+    public bool vSync;
+    public ParticleEffects particleEffects;
+    
+    [System.Serializable]
+    public struct ScreenSize
+    {
+        public uint scale;
+        public bool fullScreen;
+    }
+    
+    public enum ParticleEffects
+    {
+        None,
+        Low,
+        Normal,
+        High
+    }
+}
+```
+
 ### Storing the primitive
