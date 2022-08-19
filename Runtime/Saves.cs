@@ -73,6 +73,15 @@ namespace solacerxt.Saving
         /// </summary>
         public static void SaveBoxed<T>(string id, ref T data, ISavedGame savedGame) => 
             _SaveBoxed(ref data, GetGameDirectory(savedGame.Index) + id);
+        
+        /// <summary>
+        /// Saves data boxed in scope of given game 
+        /// </summary>
+        public static void SaveBoxed<T>(string id, T data, ISavedGame savedGame)
+        {
+            var d = data;
+            _SaveBoxed(ref d, GetGameDirectory(savedGame.Index) + id);
+        }
 
         /// <summary> 
         /// Saves data in app scope 
@@ -85,6 +94,15 @@ namespace solacerxt.Saving
         /// </summary>
         public static void SaveBoxed<T>(string id, ref T data) => 
             _SaveBoxed(ref data, id);
+        
+        /// <summary> 
+        /// Saves data boxed in app scope 
+        /// </summary>
+        public static void SaveBoxed<T>(string id, T data) 
+        {
+            var d = data;
+            _SaveBoxed(ref d, id);
+        }
 
         private static void _SaveBoxed<T>(ref T data, string path)
         {
