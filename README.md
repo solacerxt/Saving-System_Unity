@@ -47,4 +47,18 @@ public struct VideoSettings : IStorable
 }
 ```
 
+#### Saving
+```csharp
+var videoSettings = new VideoSettings();
+...
+Saves.Save(ref videoSettings, "video"); // pass the id (string) as second argument
+```
+
+#### Loading
+```csharp
+var videoSettings = Saves.Load<VideoSettings>("id") ?? new VideoSettings(); // nullable version
+
+Saves.TryLoad("id", ref videoSettings);
+```
+
 ### Storing the primitive
