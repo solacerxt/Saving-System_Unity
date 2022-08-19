@@ -13,4 +13,5 @@ https://github.com/solacerxt/Saving-System_Unity.git
 
 _Make sure that your Unity version is >= 2021.3.8f1_
 
-## Usage
+## Overview
+The static class `Saves` allows you to load and save data with appropriate comprehensive methods. Basically, it works with serializable structures, 'implementing' `IStorable` interface _(this is an empty interface, made for constraining generic type)_
