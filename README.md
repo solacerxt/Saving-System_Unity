@@ -25,7 +25,7 @@ vSync: bool
 particleEffects: None | Low | Normal | High
 ```
 
-To store them, we should define an IStorable structure with [System.Serializable] attribute:
+To store them, we define an IStorable structure with [System.Serializable] attribute:
 ```csharp
 using solacerxt.Saving;
 
@@ -43,13 +43,7 @@ public struct VideoSettings : IStorable
         public bool fullScreen;
     }
     
-    public enum ParticleEffects
-    {
-        None,
-        Low,
-        Normal,
-        High
-    }
+    public enum ParticleEffects { None, Low, Normal, High }
 }
 ```
 
