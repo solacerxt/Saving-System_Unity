@@ -2,7 +2,7 @@
 
 * Easily save and load primitive objects, Dictionary and other [JsonUtility supported types](https://docs.unity3d.com/2020.1/Documentation/Manual/JSONSerialization.html)
 * Save and load complex data consiting of the supported types described above
-* Bind saving data to specific _game save_. This allows you to store global data (for the whole app) and local data for specific saved game
+* Bind saving data to specific _game save_. This allows you to separately store global data (for the whole app) and local data for specific saved game
 
 ## Installation
 
