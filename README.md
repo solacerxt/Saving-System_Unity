@@ -58,7 +58,7 @@ Saves.Save("video", ref videoSettings); // pass the id (string) as first argumen
 ```csharp
 var videoSettings = Saves.Load<VideoSettings>("id") ?? new VideoSettings(); // nullable version
 
-Saves.TryLoad("id", ref videoSettings);
+Saves.TryLoad("id", ref videoSettings); // returns true and rewrites videoSettings if success, false otherwise
 ```
 
 ### Storing the primitive
