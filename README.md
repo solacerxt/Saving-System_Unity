@@ -62,3 +62,33 @@ Saves.TryLoad("id", ref videoSettings); // returns true and rewrites videoSettin
 ```
 
 ### Storing the primitive
+Imagine we need to save app language:
+```csharp
+public enum Language { English, Russian, Japanese ... }
+```
+We can define this structure
+```csharp
+using solacerxt.Saving;
+
+[System.Serializable]
+public struct StorableLanguage : IStorable
+{
+    public Language value;
+}
+```
+But the better solution is to create a generic version:
+```csharp
+using solacerxt.Saving;
+
+[System.Serializable]
+public struct StorableBox<T> : IStorable
+{
+    public T value;
+}
+```
+and use StorableBox<Language> for this purpose, without adding new stuctures to store other primitives
+
+However, you don't need to define this structure, there are already built-in SBox<T>. Moreover, you can use special methods for this, such as:
+```csharp
+    
+```
