@@ -102,7 +102,7 @@ Saves.SaveBoxed("lang", Language.Japanese);
 Saves.TryLoadFromBox("lang", ref lang);
 lang = Saves.LoadFromBoxOrDefault("lang", Language.English);
 ```
-### Binding data to the game save*
+### Binding data to the game save
 For games, where player can have multiple game saves (e.g. Hollow Knight), it's important to save all game data for specific game save in separate place. 
 
 Your may have some type of this class for game entity in your app:
