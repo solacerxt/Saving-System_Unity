@@ -51,7 +51,7 @@ public struct VideoSettings : IStorable
 ```csharp
 var videoSettings = new VideoSettings();
 ...
-Saves.Save("video", ref videoSettings); // pass the id (string) as first argument
+Saves.Save("video", ref videoSettings); // pass the id (string) as a first parameter
 ```
 
 #### Loading
@@ -101,4 +101,34 @@ Saves.SaveBoxed("lang", Language.Japanese);
 ```csharp
 Saves.TryLoadFromBox("lang", ref lang);
 lang = Saves.LoadFromBoxOrDefault("lang", Language.English);
+```
+### Binding data to the game save*
+For games, where player can have multiple game saves (e.g. Hollow Knight), it's important to save all game data for specific game save in separate place. 
+
+Your may have some type of this class for game entity in your app:
+```csharp
+public class Game
+{
+    ...
+    public static Game? Current { get; private set; }
+    ...
+}
+```
+
+`Saves` have methods for loading and saving that requires the parameter `ISavedGame savedGame`, where `ISavedGame` requires to have `int Index { get; }` property, so game saves are identified by its Index:
+```csharp
+public class Game : ISavedGame
+{
+    ...
+    public static Game? Current { get; private set; }
+
+    public int Index { get; private set; }
+    ...
+}
+```
+Now we can load and save data for current game:
+```csharp
+var inventoryData = new InventoryData(...);
+Saves.Save("inventory", Game!.Current, ref inventoryData);
+Saves.TryLoad("inventory", Game!.Current, ref inventoryData);
 ```
