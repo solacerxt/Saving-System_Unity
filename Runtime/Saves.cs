@@ -65,14 +65,14 @@ namespace solacerxt.Saving
         /// <summary>
         /// Saves data in scope of given game 
         /// </summary>
-        public static void Save<S>(string id, ref S data, ISavedGame savedGame) where S : struct, IStorable => 
-            _Save(ref data, GetGameDirectory(savedGame.Index) + id);
+        public static void Save<S>(string id, in S data, ISavedGame savedGame) where S : struct, IStorable => 
+            _Save(in data, GetGameDirectory(savedGame.Index) + id);
 
         /// <summary>
         /// Saves data boxed in scope of given game 
         /// </summary>
-        public static void SaveBoxed<T>(string id, ref T data, ISavedGame savedGame) => 
-            _SaveBoxed(ref data, GetGameDirectory(savedGame.Index) + id);
+        public static void SaveBoxed<T>(string id, in T data, ISavedGame savedGame) => 
+            _SaveBoxed(in data, GetGameDirectory(savedGame.Index) + id);
         
         /// <summary>
         /// Saves data boxed in scope of given game 
@@ -80,20 +80,20 @@ namespace solacerxt.Saving
         public static void SaveBoxed<T>(string id, T data, ISavedGame savedGame)
         {
             var d = data;
-            _SaveBoxed(ref d, GetGameDirectory(savedGame.Index) + id);
+            _SaveBoxed(in d, GetGameDirectory(savedGame.Index) + id);
         }
 
         /// <summary> 
         /// Saves data in app scope 
         /// </summary>
-        public static void Save<S>(string id, ref S data) where S : struct, IStorable => 
-            _Save(ref data, id);
+        public static void Save<S>(string id, in S data) where S : struct, IStorable => 
+            _Save(in data, id);
 
         /// <summary> 
         /// Saves data boxed in app scope 
         /// </summary>
-        public static void SaveBoxed<T>(string id, ref T data) => 
-            _SaveBoxed(ref data, id);
+        public static void SaveBoxed<T>(string id, in T data) => 
+            _SaveBoxed(in data, id);
         
         /// <summary> 
         /// Saves data boxed in app scope 
@@ -101,16 +101,16 @@ namespace solacerxt.Saving
         public static void SaveBoxed<T>(string id, T data) 
         {
             var d = data;
-            _SaveBoxed(ref d, id);
+            _SaveBoxed(in d, id);
         }
 
-        private static void _SaveBoxed<T>(ref T data, string path)
+        private static void _SaveBoxed<T>(in T data, string path)
         {
             var box = new SBox<T>(data);
-            _Save(ref box, path);
+            _Save(in box, path);
         }
 
-        private static void _Save<S>(ref S data, string path) where S : struct, IStorable
+        private static void _Save<S>(in S data, string path) where S : struct, IStorable
         {
             var serialized = JsonUtility.ToJson(data);
             File.WriteAllText(Application.persistentDataPath + "/" + path, serialized);
