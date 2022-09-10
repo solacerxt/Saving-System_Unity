@@ -51,7 +51,7 @@ public struct VideoSettings : IStorable
 ```csharp
 var videoSettings = new VideoSettings();
 ...
-Saves.Save("video", in videoSettings); // pass the id (string) as a first parameter
+Saves.Save("video", videoSettings); // pass the id (string) as a first parameter
 ```
 
 #### Loading
@@ -94,7 +94,7 @@ Moreover, you can use special methods for this, such as:
 #### Saving
 ```csharp
 var lang = Language.English;
-Saves.SaveBoxed("lang", in lang);
+Saves.SaveBoxed("lang", lang);
 Saves.SaveBoxed("lang", Language.Japanese);
 ```
 #### Loading
@@ -129,6 +129,6 @@ public class Game : ISavedGame
 Now we can load and save data for current game:
 ```csharp
 var inventoryData = new InventoryData(...);
-Saves.Save("inventory", Game!.Current, in inventoryData);
+Saves.Save("inventory", Game!.Current, inventoryData);
 Saves.TryLoad("inventory", Game!.Current, ref inventoryData);
 ```
