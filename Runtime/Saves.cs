@@ -11,116 +11,111 @@ namespace solacerxt.Saving
         /// <summary> 
         /// Loads data with given id. Returns false if there is no such data saved in this game 
         /// </summary>
-        public static bool TryLoad<S>(string id, ISavedGame savedGame, ref S obj) where S : struct, IStorable => 
-            _Load(GetGameDirectory(savedGame.Index) + "/", id, ref obj);
+        public static bool TryLoad<S>(string id, ISavedGame savedGame, ref S obj, Func<string, string>? decoder = null) where S : struct, IStorable => 
+            _Load(GetGameDirectory(savedGame.Index) + "/", id, ref obj, decoder);
 
         /// <summary> 
         /// Loads data from box with given id. Returns false if there is no such data saved in this game 
         /// </summary>
-        public static bool TryLoadFromBox<T>(string id, ISavedGame savedGame, ref T obj) =>
-            _LoadFromBox(GetGameDirectory(savedGame.Index) + "/", id, ref obj);
+        public static bool TryLoadFromBox<T>(string id, ISavedGame savedGame, ref T obj, Func<string, string>? decoder = null) =>
+            _LoadFromBox(GetGameDirectory(savedGame.Index) + "/", id, ref obj, decoder);
 
         /// <summary> 
         /// Loads data from box with given id. Returns defaultValue if there is no such data saved in this game
         /// </summary>
-        public static T LoadFromBoxOrDefault<T>(string id, ISavedGame savedGame, T defaultValue) 
+        public static T LoadFromBoxOrDefault<T>(string id, ISavedGame savedGame, T defaultValue, Func<string, string>? decoder = null) 
         {
-            _LoadFromBox(GetGameDirectory(savedGame.Index) + "/", id, ref defaultValue);
+            _LoadFromBox(GetGameDirectory(savedGame.Index) + "/", id, ref defaultValue, decoder);
             return defaultValue;
         }
 
         ///<summary> 
         ///Loads data with given id. Returns null if there is no such data saved in this game 
         ///</summary>
-        public static S? Load<S>(string id, ISavedGame savedGame) where S : struct, IStorable => 
-            _Load<S>(GetGameDirectory(savedGame.Index) + "/", id);
+        public static S? Load<S>(string id, ISavedGame savedGame, Func<string, string>? decoder = null) where S : struct, IStorable => 
+            _Load<S>(GetGameDirectory(savedGame.Index) + "/", id, decoder);
 
         /// <summary> 
         /// Loads data with given id. Returns false if there is no such data saved in app 
         /// </summary>
-        public static bool TryLoad<S>(string id, ref S obj) where S : struct, IStorable => 
-            _Load<S>("", id, ref obj);
+        public static bool TryLoad<S>(string id, ref S obj, Func<string, string>? decoder = null) where S : struct, IStorable => 
+            _Load<S>("", id, ref obj, decoder);
 
         /// <summary> 
         /// Loads data from box with given id. Returns false if there is no such data saved in app
         /// </summary>
-        public static bool TryLoadFromBox<T>(string id, ref T obj) =>
-            _LoadFromBox("", id, ref obj);
+        public static bool TryLoadFromBox<T>(string id, ref T obj, Func<string, string>? decoder = null) =>
+            _LoadFromBox("", id, ref obj, decoder);
 
         /// <summary> 
         /// Loads data from box with given id. Returns defaultValue if there is no such data saved in app
         /// </summary>
-        public static T LoadFromBoxOrDefault<T>(string id, T defaultValue) 
+        public static T LoadFromBoxOrDefault<T>(string id, T defaultValue, Func<string, string>? decoder = null) 
         {
-            _LoadFromBox("", id, ref defaultValue);
+            _LoadFromBox("", id, ref defaultValue, decoder);
             return defaultValue;
         }
 
         ///<summary> 
         ///Loads data with given id. Returns null if there is no such data saved in app 
         ///</summary>
-        public static S? Load<S>(string id) where S : struct, IStorable => 
-            _Load<S>("", id);
+        public static S? Load<S>(string id, Func<string, string>? decoder = null) where S : struct, IStorable => 
+            _Load<S>("", id, decoder);
 
         /// <summary>
         /// Saves data in scope of given game 
         /// </summary>
-        public static void Save<S>(string id, in S data, ISavedGame savedGame) where S : struct, IStorable => 
-            _Save(in data, GetGameDirectory(savedGame.Index) + id);
+        public static void Save<S>(string id, in S data, ISavedGame savedGame, Func<string, string>? encoder = null) where S : struct, IStorable => 
+            _Save(data, GetGameDirectory(savedGame.Index) + id, encoder);
 
         /// <summary>
         /// Saves data boxed in scope of given game 
         /// </summary>
-        public static void SaveBoxed<T>(string id, in T data, ISavedGame savedGame) => 
-            _SaveBoxed(in data, GetGameDirectory(savedGame.Index) + id);
+        public static void SaveBoxed<T>(string id, in T data, ISavedGame savedGame, Func<string, string>? encoder = null) => 
+            _SaveBoxed(data, GetGameDirectory(savedGame.Index) + id, encoder);
         
         /// <summary>
         /// Saves data boxed in scope of given game 
         /// </summary>
-        public static void SaveBoxed<T>(string id, T data, ISavedGame savedGame)
-        {
-            var d = data;
-            _SaveBoxed(in d, GetGameDirectory(savedGame.Index) + id);
-        }
+        public static void SaveBoxed<T>(string id, T data, ISavedGame savedGame, Func<string, string>? encoder = null) =>
+            _SaveBoxed(data, GetGameDirectory(savedGame.Index) + id, encoder);
 
         /// <summary> 
         /// Saves data in app scope 
         /// </summary>
-        public static void Save<S>(string id, in S data) where S : struct, IStorable => 
-            _Save(in data, id);
+        public static void Save<S>(string id, in S data, Func<string, string>? encoder = null) where S : struct, IStorable => 
+            _Save(data, id, encoder);
 
         /// <summary> 
         /// Saves data boxed in app scope 
         /// </summary>
-        public static void SaveBoxed<T>(string id, in T data) => 
-            _SaveBoxed(in data, id);
+        public static void SaveBoxed<T>(string id, in T data, Func<string, string>? encoder = null) => 
+            _SaveBoxed(data, id, encoder);
         
         /// <summary> 
         /// Saves data boxed in app scope 
         /// </summary>
-        public static void SaveBoxed<T>(string id, T data) 
-        {
-            var d = data;
-            _SaveBoxed(in d, id);
-        }
+        public static void SaveBoxed<T>(string id, T data, Func<string, string>? encoder = null) =>
+            _SaveBoxed(data, id, encoder);
 
-        private static void _SaveBoxed<T>(in T data, string path)
+        private static void _SaveBoxed<T>(in T data, string path, Func<string, string>? encoder)
         {
             var box = new SBox<T>(data);
-            _Save(in box, path);
+            _Save(box, path, encoder);
         }
 
-        private static void _Save<S>(in S data, string path) where S : struct, IStorable
+        private static void _Save<S>(in S data, string path, Func<string, string>? encoder) where S : struct, IStorable
         {
             var serialized = JsonUtility.ToJson(data);
+            if (encoder != null) serialized = encoder.Invoke(serialized);
             File.WriteAllText(Application.persistentDataPath + "/" + path, serialized);
         }
 
-        private static bool _LoadFromBox<T>(string localPath, string id, ref T obj)
+        private static bool _LoadFromBox<T>(string localPath, string id, ref T obj, Func<string, string>? decoder)
         {
             var box = new SBox<T>();
 
-            if (_Load(localPath, id, ref box))
+            if (_Load(localPath, id, ref box, decoder))
             {
                 obj = box.Value;
                 return true;
@@ -128,23 +123,25 @@ namespace solacerxt.Saving
 
             return false;
         }
+        
+        private static S? _Load<S>(string localPath, string id, Func<string, string>? decoder) where S : struct, IStorable
+        {
+            S data = new S();
+            if (!_Load(localPath, id, ref data, decoder)) return null;
 
-        private static bool _Load<S>(string localPath, string id, ref S obj) where S : struct, IStorable
+            return data;
+        }
+
+        private static bool _Load<S>(string localPath, string id, ref S obj, Func<string, string>? decoder) where S : struct, IStorable
         {
             var path = Application.persistentDataPath + "/" + localPath + id;
 
             if (!File.Exists(path)) return false;
-            JsonUtility.FromJsonOverwrite(File.ReadAllText(path), obj);
+            var str = File.ReadAllText(path);
+            if (decoder != null) str = decoder.Invoke(str);
+            JsonUtility.FromJsonOverwrite(str, obj);
 
             return true;
-        }
-
-        private static S? _Load<S>(string localPath, string id) where S : struct, IStorable
-        {
-            S data = new S();
-            if (!_Load(localPath, id, ref data)) return null;
-
-            return data;
         }
     }
 }
