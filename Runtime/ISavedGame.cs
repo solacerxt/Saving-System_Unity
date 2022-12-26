@@ -1,5 +1,5 @@
 
-namespace solacerxt.Saving
+namespace solacerxt.SaveSystem
 {
     public interface ISavedGame
     {
