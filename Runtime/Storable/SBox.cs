@@ -1,5 +1,5 @@
 
-namespace solacerxt.Saving
+namespace solacerxt.SaveSystem
 {
     [System.Serializable]
     public struct SBox<T> : IStorable
