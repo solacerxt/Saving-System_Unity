@@ -1,11 +1,11 @@
 {
-  "name": "com.solacerxt.saving",
+  "name": "com.solacerxt.savesystem",
   "version": "1.0.1",
-  "displayName": "Saving System",
-  "description": "Simple saving system for Unity game with multiple game saves",
+  "displayName": "Save System",
+  "description": "Simple save system for Unity game with multiple game saves",
   "unity": "2021.3",
   "unityRelease": "8f1",
-  "documentationUrl": "https://github.com/solacerxt/Saving-System_Unity/blob/main/README.md#overview",
+  "documentationUrl": "https://github.com/solacerxt/Save-System_Unity/blob/main/README.md#overview",
   "changelogUrl": "",
   "licensesUrl": "",
   "keywords": [
