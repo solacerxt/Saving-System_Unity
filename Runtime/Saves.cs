@@ -1,7 +1,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace solacerxt.Saving
+namespace solacerxt.SaveSystem
 {
     public static class Saves 
     {
@@ -139,9 +139,11 @@ namespace solacerxt.Saving
         {
             var path = Application.persistentDataPath + "/" + localPath + id;
 
-            if (!File.Exists(path)) return false;
+            if (!File.Exists(path)) 
+                return false;
             var str = File.ReadAllText(path);
-            if (decoder != null) str = decoder.Invoke(str);
+            if (decoder != null) 
+                str = decoder.Invoke(str);
             JsonUtility.FromJsonOverwrite(str, obj);
 
             return true;
