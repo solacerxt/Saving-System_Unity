@@ -27,7 +27,7 @@ particleEffects: None | Low | Normal | High
 
 To store them, we define an IStorable structure with [System.Serializable] attribute:
 ```csharp
-using solacerxt.Saving;
+using solacerxt.SaveSystem;
 
 [System.Serializable]
 public struct VideoSettings : IStorable
@@ -68,7 +68,7 @@ public enum Language { English, Russian, Japanese ... }
 ```
 We can define this structure
 ```csharp
-using solacerxt.Saving;
+using solacerxt.SaveSystem;
 
 [System.Serializable]
 public struct StorableLanguage : IStorable
@@ -78,7 +78,7 @@ public struct StorableLanguage : IStorable
 ```
 But the better solution is to create a generic version:
 ```csharp
-using solacerxt.Saving;
+using solacerxt.SaveSystem;
 
 [System.Serializable]
 public struct StorableBox<T> : IStorable
