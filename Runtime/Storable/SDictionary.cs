@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace solacerxt.Saving
+namespace solacerxt.SaveSystem
 {
     [System.Serializable]
     public struct SDictionary<K, V> : IStorable, IEnumerable<KeyValuePair<K, V>>
